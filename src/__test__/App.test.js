@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { configure, shallow } from 'enzyme';
+import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import 'babel-polyfill';
 
 // Custom Modules
-import App from '@/App';
-import * as itemsAPI from '@/utils/itemsAPI';
+import App from '../App';
+import * as itemsAPI from '../utils/itemsAPI';
 
 // Test Data
 import mockData from './_mockData';
@@ -41,7 +42,7 @@ describe('<App />', () => {
 
   it('It Fetches the items data from the API. The data its saved in the `state` once is ready.', async () => {
     const initialResponse = await itemsAPI.getAll();
-    const wrapper = shallow(<App />, { lifecycleExperimental: true });
+    const wrapper = mount(<App />);
 
     itemsAPI.getAll().then(() => {
       expect(wrapper.state().items).toEqual(initialResponse.items);

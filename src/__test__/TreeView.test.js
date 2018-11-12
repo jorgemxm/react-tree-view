@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { configure, shallow } from 'enzyme';
+import { configure, mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import 'babel-polyfill';
 
 // Custom Modules
-import TreeView, { TreeItem } from '@/components/TreeView';
-import * as itemsAPI from '@/utils/itemsAPI';
+import TreeView, { TreeItem } from '../components/TreeView';
+import * as itemsAPI from '../utils/itemsAPI';
 
 // Test Data
 import mockData from './_mockData';
@@ -19,8 +19,6 @@ let mockItem = mockData.items.items[0];
 configure({ adapter: new Adapter() });
 
 beforeEach(() => {
-
-  // Mock Fetch
   global.fetch = jest.fn().mockImplementation(() => {
     return new Promise((resolve, reject) => {
       resolve({
@@ -40,7 +38,7 @@ describe('<TreeView /> Component', () => {
   it('It receives all the necessary props', async () => {
 
     const initialResponse = await itemsAPI.getAll();
-    const wrapper = shallow(
+    const wrapper = mount(
       <TreeView
         items={ initialResponse.items }
         heading="Custom Title"
@@ -55,11 +53,10 @@ describe('<TreeView /> Component', () => {
   });
 
 
-  it('should render the component Header in the DOM when a heading is provided', async () => {
+  it('should render the component Header in the DOM when a heading is provided', () => {
     const testTitle = 'Test Component Title';
-    // const initialResponse = await itemsAPI.getAll();
     const initialResponse = mockData;
-    const wrapper = shallow(
+    const wrapper = mount(
       <TreeView
         items={ initialResponse.items }
         heading={ testTitle }
@@ -73,10 +70,9 @@ describe('<TreeView /> Component', () => {
   });
 
 
-  it('should not render the component Header if it wasn\'t provided', async () => {
-    // const initialResponse = await itemsAPI.getAll();
+  it('should not render the component Header if it wasn\'t provided', () => {
     const initialResponse = mockData;
-    const wrapper = shallow(<TreeView items={ initialResponse.items } />);
+    const wrapper = mount(<TreeView items={ initialResponse.items } />);
 
     // Header element should not exist in the DOM if the `heading` prop is empty.
     expect(wrapper.find('.c-tree-view__nodes-header').exists()).toEqual(false);
@@ -84,8 +80,7 @@ describe('<TreeView /> Component', () => {
   });
 
 
-  it('should render a <TreeView /> component with one <TreeItem /> child', async () => {
-    // const initialResponse = await itemsAPI.getAll();
+  it('should render a <TreeView /> component with one <TreeItem /> child', () => {
     const initialResponse = mockData;
     const wrapper = shallow(<TreeView items={ initialResponse.items } />);
 
@@ -103,26 +98,26 @@ describe('<TreeView /> Component', () => {
 describe('<TreeItem /> Sub-Component', () => {
 
   it('should render one child item expanded by default', () => {
-    const wrapper = shallow(<TreeItem {...mockItem } />);
+    const wrapper = mount(<TreeItem {...mockItem } />);
 
     expect(wrapper.state().isExpanded).toEqual(true);
-    expect(wrapper.find('.c-tree-view__item').hasClass('is-expanded')).toEqual(true);
+    expect(wrapper.find('.c-tree-view__item').at(0).hasClass('is-expanded')).toEqual(true);
 
   });
 
 
   it('should toggle the state to be Collapsed/Expanded when the title is clicked', () => {
-    const wrapper = shallow(<TreeItem {...mockItem } />);
+    const wrapper = mount(<TreeItem {...mockItem } />);
 
     // Click the title element once in order to Collapse the panel.
-    wrapper.find('.c-tree-view__item-title').simulate('click');
+    wrapper.find('.c-tree-view__item-title').at(0).simulate('click');
     expect(wrapper.state().isExpanded).toEqual(false);
-    expect(wrapper.find('.c-tree-view__item').hasClass('is-expanded')).toEqual(false);
+    expect(wrapper.find('.c-tree-view__item').at(0).hasClass('is-expanded')).toEqual(false);
 
     // Click the title element one more time in order to Expand the panel.
-    wrapper.find('.c-tree-view__item-title').simulate('click');
+    wrapper.find('.c-tree-view__item-title').at(0).simulate('click');
     expect(wrapper.state().isExpanded).toEqual(true);
-    expect(wrapper.find('.c-tree-view__item').hasClass('is-expanded')).toEqual(true);
+    expect(wrapper.find('.c-tree-view__item').at(0).hasClass('is-expanded')).toEqual(true);
 
   });
 
