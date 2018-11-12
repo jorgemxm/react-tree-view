@@ -9,15 +9,14 @@ module.exports = {
     template: './src/index.ejs', // If it exists, otherwise use built-in template
     pkg: {}
   },
-  presets: [
-    require('poi-preset-react')(),
-    require('poi-preset-eslint')({
-      mode: '*',
-      loaderOptions: {
+  plugins: [
+    {
+      resolve: '@poi/plugin-eslint',
+      options: {
         configFile: './.eslintrc.js',
         useEslintrc: false, // Enforce our own ESLint config file
       }
-    })
+    }
   ],
   transformModules: [
     'whatwg-fetch',

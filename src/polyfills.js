@@ -1,7 +1,7 @@
 /**
 * requestAnimationFrame polyfill
 */
-import 'raf/polyfill';
+require('raf/polyfill');
 
 
 /**

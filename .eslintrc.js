@@ -1,14 +1,13 @@
 module.exports = {
   extends: [
-    'plugin:react/recommended',
     'eslint:recommended',
+    'plugin:react/recommended',
   ],
   env: {
     browser: true,
     node: true,
     es6: true
   },
-  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 7,
     sourceType: "module",
@@ -17,9 +16,15 @@ module.exports = {
       jsx: true
     }
   },
-  plugins: [
-    'react',
-  ],
+  plugins: [ 'react' ],
+
+  // https://github.com/yannickcr/eslint-plugin-react
+  settings: {
+    react: {
+      pragma: 'React', // Pragma to use, default to "React"
+      version: "16.0",
+    }
+  },
 
   globals: {},
 

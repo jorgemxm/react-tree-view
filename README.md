@@ -23,3 +23,6 @@
 - ESLint is used for JavaScript code linting. (ESLints runs both with the dev-server and the production builds).
 - Tests were written using Jest and Enzyme.
 - Additional polyfills were included for older browsers (Fetch/Promises).
+
+### Serve Prod Builds
+- npm run build && http-server dist -p 8080 -o -s
