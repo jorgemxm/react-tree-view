@@ -1,6 +1,3 @@
-/**
-* TreeView: Main Component
-*/
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -8,25 +5,25 @@ import PropTypes from 'prop-types';
 import './TreeView.scss';
 import TreeItem from './TreeItem';
 
-
+/*
+* TreeView: Main Component
+* @return {JSX.Element}
+*/
 export default class TreeView extends Component {
-
   static propTypes = {
     heading: PropTypes.string,
     items: PropTypes.shape({
       label: PropTypes.string.isRequired,
-      items: PropTypes.array
+      items: PropTypes.array,
     }).isRequired,
   }
 
   render() {
-
     const { items, heading } = this.props;
 
     return (
       <div className="c-tree-view">
 
-        {/* Render the Component Header if the value was provided */}
         { heading && (
           <div className="c-tree-view__nodes-header">
             <h2 className="c-tree-view__heading">
@@ -44,5 +41,4 @@ export default class TreeView extends Component {
       </div>
     );
   }
-
 }

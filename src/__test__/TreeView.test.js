@@ -18,7 +18,7 @@ beforeEach(() => {
     return new Promise((resolve, reject) => {
       resolve({
         ok: true,
-        json: () => (mockData)
+        json: () => (mockData),
       });
     });
   });

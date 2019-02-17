@@ -5,9 +5,8 @@ import * as itemsAPI from '@/utils/itemsAPI';
 import TreeView from '@/components/TreeView';
 
 export default class App extends Component {
-
   state = {
-    items: {}
+    items: {},
   };
 
   componentDidMount() {
@@ -16,7 +15,7 @@ export default class App extends Component {
 
   loadData() {
     itemsAPI.getAll()
-    .then(({ items }) => this.setState({ items }));
+      .then(({ items }) => this.setState({ items }));
   }
 
   render() {

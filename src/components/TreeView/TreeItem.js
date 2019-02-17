@@ -1,22 +1,21 @@
-/**
-* TreeItem Component: It Renders Child Nodes
-*/
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-
+/**
+* TreeItem Component: It Renders Child Nodes
+* @return {JSX.Element}
+*/
 export default class TreeItem extends Component {
-
   static propTypes = {
     isExpanded: PropTypes.bool,
     label: PropTypes.string.isRequired,
     items: PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string,
-        items: PropTypes.array
+        items: PropTypes.array,
       })
-    )
+    ),
   }
 
   // Default Props
@@ -27,11 +26,11 @@ export default class TreeItem extends Component {
 
   // Default State
   state = {
-    isExpanded: true
+    isExpanded: true,
   }
 
   /**
-  *
+  * @return {Array}
   */
   getClassNames() {
     const { isExpanded } = this.state;
@@ -41,13 +40,14 @@ export default class TreeItem extends Component {
       'c-tree-view__item',
       {
         'is-expanded': isExpanded,
-        'has-children': hasChildItems
+        'has-children': hasChildItems,
       }
     );
   }
 
   /**
   * Accessibility Enhancements
+  * @param {Object} event -
   */
   handleKeyPress = event => {
     if (event.key === 'Enter') {
@@ -57,6 +57,7 @@ export default class TreeItem extends Component {
 
   /**
   * Handle Click Event only if the current Node has Child Nodes
+  * @param {Object} event -
   */
   handleToggle = event => {
     if (this.props.items.length) {
@@ -64,37 +65,35 @@ export default class TreeItem extends Component {
     }
   }
 
-
   /**
   * Update Collapsed/Expanded Node State
   */
   toggleState = () => {
     this.setState((state, props) => ({
-      isExpanded: !state.isExpanded
+      isExpanded: !state.isExpanded,
     }));
   }
-
 
   render() {
     let { label, items } = this.props;
 
     // 1. Validate if the Current Node has Child Nodes or not.
     const childItems = (items)
-    ? items.map((node, index) => (<TreeItem key={ index } {...node } />))
-    : [];
+      ? items.map((node, index) => (<TreeItem key={ index } {...node } />))
+      : [];
 
     const hasChildItems = (childItems.length > 0);
 
-    // 2. Set default icon when the Current Node doesn't have Child Nodes
+    // Default icon when the Current Node doesn't have Child Nodes
     const iconDefault = (
       <i className="icon icon-default material-icons"
-      aria-hidden="true">radio_button_unchecked</i>
+        aria-hidden="true">radio_button_unchecked</i>
     );
 
-    // 2. Set Icon used when the Current Node has Child Nodes
+    // Icon used when the Current Node has Child Nodes
     const iconsToggleState = (
       <i className="icon icon-toggle material-icons"
-      aria-hidden="true">keyboard_arrow_right</i>
+        aria-hidden="true">keyboard_arrow_right</i>
     );
 
     const itemCssClasses = this.getClassNames();
@@ -107,18 +106,17 @@ export default class TreeItem extends Component {
           tabIndex={ hasChildItems ? '0' : undefined }
           onKeyPress={ this.handleKeyPress }
         >
-        {/* Render a custom icon based on if the current node has child items or not */}
-        { !hasChildItems
-          ? iconDefault
-          : iconsToggleState
-        }
+          {/* Render a custom icon based on if the current node has child items or not */}
+          { !hasChildItems
+            ? iconDefault
+            : iconsToggleState
+          }
           <span className="c-tree-view__item-label">{ label }</span>
         </div>
 
-        {/* Render Child Items if any. */}
         { hasChildItems && (
           <ul className="c-tree-view__item-children">
-          { childItems }
+            { childItems }
           </ul>
         ) }
 

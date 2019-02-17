@@ -1,20 +1,12 @@
-/**
-* requestAnimationFrame polyfill
-*/
+// RequestAnimationFrame polyfill
 require('raf/polyfill');
 
-
-/**
-* ES6 Promises polyfill
-*/
+// ES6 Promises polyfill
 if (!window.Promise) {
   window.Promise = require('promise-polyfill');
 }
 
-
-/**
-* Fetch API polyfill
-*/
+// Fetch API polyfill
 if (!window.fetch) {
   require('whatwg-fetch');
 }
