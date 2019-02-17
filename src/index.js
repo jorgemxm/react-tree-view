@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
+import { hot } from 'react-hot-loader';
 import '@/polyfills';
 
 import '@/assets/global.scss';
@@ -8,15 +8,11 @@ import App from '@/App';
 
 const render = Component => {
   ReactDOM.render(
-    <AppContainer>
-      <Component />
-    </AppContainer>,
+    <Component />,
     document.getElementById('app')
   );
 };
 
 render(App);
 
-if (module.hot) {
-  module.hot.accept('@/App', () => { render(App) });
-}
+export default hot(module)(App)
