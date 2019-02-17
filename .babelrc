@@ -3,7 +3,7 @@
     "development": {
       "presets": [
         [
-          "module:poi/babel",
+          "poi/babel",
           {
             "jsx": "react"
           }

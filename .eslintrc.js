@@ -6,23 +6,26 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    es6: true
+    es6: true,
+    jest: true,
   },
+  parser: "babel-eslint", // Fix: Parsing error: Unexpected token = in "static propTypes = {"
   parserOptions: {
-    ecmaVersion: 7,
+    ecmaVersion: 10,
     sourceType: "module",
     ecmaFeatures: {
       impliedStrict: true,
-      jsx: true
+      jsx: true,
     }
   },
+
   plugins: [ 'react' ],
 
   // https://github.com/yannickcr/eslint-plugin-react
   settings: {
     react: {
-      pragma: 'React', // Pragma to use, default to "React"
-      version: "16.0",
+      pragma: "React",
+      version: "detect",
     }
   },
 
@@ -33,11 +36,19 @@ module.exports = {
   *  0 = off  |  1 = warn  |  2 = error
   */
   rules: {
-    'eqeqeq': 2, // require use of explicit equality comparators - "===", "!=="
-    'indent': ['error', 2, { 'SwitchCase': 2 }], // Added so gulp-eslint fixes indentation when is initialized
+    'comma-dangle': [2, {
+      arrays: 'only-multiline',
+      objects: 'only-multiline',
+      imports: 'only-multiline',
+      exports: 'only-multiline',
+      functions: 'only-multiline'
+    }],
+    'eqeqeq': 'error', // require use of explicit equality comparators - "===", "!=="
+    'indent': ['error', 2, { 'SwitchCase': 2 }],
+    'object-curly-spacing': ['error', 'always'],
     'no-console': 'warn',
     'no-debugger': 'warn',
-    'no-trailing-spaces': 'error', // disallow trailing whitespace at the end of lines
+    'no-trailing-spaces': 'error',
     'no-unused-vars': ['error', { 'vars': 'all', 'args': 'none' }],
     'no-var': 'error', // ES6: This rule is aimed at discouraging the use of var and encouraging the use of const or let instead.
   }
