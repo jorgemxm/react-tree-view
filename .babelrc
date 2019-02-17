@@ -12,24 +12,19 @@
     },
     "test": {
       "plugins": [
+        "transform-es2015-modules-commonjs",
         "transform-async-to-generator",
-        [
-          "transform-class-properties",
-          {
-            "spec": true
-          }
-        ],
-        "transform-es2015-modules-commonjs"
+        "transform-class-properties"
       ],
       "presets": [
         [
-          "env",
+          "@babel/preset-env",
           {
-            "modules": "commonjs",
-            "useBuiltIns": true
+            "modules": "commonjs"
           }
         ],
-        "react"
+        "@babel/preset-react",
+        "jest"
       ]
     }
   }

@@ -3,9 +3,12 @@ module.exports = {
     'node_modules',
     'src'
   ],
-  testURL: 'http://localhost/',
-  transform: {
-    '^.+\\.(js|jsx)$': '<rootDir>/node_modules/babel-jest',
+  moduleNameMapper: {
+    '\\.s?css$': '<rootDir>/src/__mocks__/stylesMock.js',
+    // Map Webpack Aliases eg: '@/components/*' to './src/components/*'
+    "@/(.*)$": "<rootDir>/src/$1"
   },
+  setupFiles: [ '<rootDir>/jest.setup.suites.js' ],
+  testURL: 'http://localhost/',
   verbose: false,
 };

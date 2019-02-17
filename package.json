@@ -6,8 +6,8 @@
     "start": "poi dev",
     "dev": "poi dev",
     "build": "poi build",
-    "test": "export NODE_ENV=test && tyu",
-    "test:watch": "tyu -- --watchAll"
+    "test": "export NODE_ENV=test && jest",
+    "test:watch": "npm run test -- --watch"
   },
   "keywords": [
     "react",
@@ -20,14 +20,15 @@
   "author": "jorge.meneses@prodigious.com",
   "license": "MIT",
   "devDependencies": {
+    "@babel/preset-env": "7.3.1",
+    "@babel/preset-react": "7.0.0",
     "@poi/plugin-eslint": "10.0.2",
     "babel-jest": "24.1.0",
     "babel-plugin-transform-async-to-generator": "6.24.1",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
     "babel-polyfill": "6.26.0",
-    "babel-preset-env": "1.7.0",
-    "babel-preset-react": "6.24.1",
+    "babel-preset-jest": "24.1.0",
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.9.1",
     "eslint-plugin-react": "7.12.4",
@@ -36,8 +37,7 @@
     "poi": "11.0.0-beta.6",
     "react-hot-loader": "4.6.5",
     "react-test-renderer": "16.8.2",
-    "sass-loader": "7.1.0",
-    "tyu": "1.0.6"
+    "sass-loader": "7.1.0"
   },
   "dependencies": {
     "classnames": "2.2.6",
